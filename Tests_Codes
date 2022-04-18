@@ -1,0 +1,54 @@
+/* Creating invitationa for a party */ 
+SELECT FirstName, LastName, Email 
+FROM Customers
+ORDER BY FirstName ASC;
+
+/* create table to store info*/
+CREATE TABLE Attendees (
+CustomerID INT,
+PartySize INT);
+
+/*Printing a menu */
+SELECT name, Description, Price, Type
+FROM Dishes
+WHERE Type IS NOT "Beverage"
+ORDER BY Type ASC, Price ASC;
+
+/*sign up customer for loyalty */
+INSERT INTO Customers 
+(FirstName, LastName, Email,Address,City,State,Phone,Birthday)
+VALUES
+("Ake", "Jane", "janeake@gmail.com", "34 Jordan", "Oklahoma","OK","23457482", "12-02-1993");
+
+SELECT* FROM Customers;
+
+/*Updating customer personal info*/
+UPDATE Customers SET 
+	Address="45 OKC", 
+	City="Las Vegas", 
+	Birthday ="1993-02-02" 
+WHERE CustomerID="102";
+
+SELECT* FROM Customers;
+
+/* removing a customers record*/
+DELETE FROM Customers
+WHERE CustomerID="101";
+
+SELECT* FROM Customers;
+
+/*log customer responses*/
+INSERT INTO Attendees
+  (CustomerID, PartySize)
+  VALUES
+  ((SELECT CustomerID FROM Customers WHERE Email="pkinvigo@hplussport.com"), 4);
+ 
+SELECT * FROM Attendees;
+
+
+SELECT Reservations.CustomerID, Customers.FirstName, Customers.LastName, Customers.Email, Reservations.PartySize
+FROM Reservations 
+JOIN
+Customers
+ON Customers.CustomerID=Reservations.CustomerID
+;
